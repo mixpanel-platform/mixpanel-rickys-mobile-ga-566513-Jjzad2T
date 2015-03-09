@@ -29,7 +29,7 @@
     $.when(contentSearched, signup).done(function(searched, signup) {
         signup = signup.values();
 
-        _.each(searched.values()[20], function(value, city) {
+        _.each(searched.values(), function(value, city) {
             if (!signup[city]) {
                 return;
             }

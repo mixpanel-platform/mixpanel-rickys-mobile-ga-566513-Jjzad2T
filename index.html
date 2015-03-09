@@ -17,11 +17,11 @@
     <div id="table"></div>
     <script>
      MP.api.ready(function() {
-    var contentSearched = MP.api.segment('Content searched', '$city', {
+    var contentSearched = MP.api.segment('Game Played', '$city', {
         from: moment().subtract(1, 'months'),
         unit: 'day'
     });
-    var signup = MP.api.segment('Button clicked', '$city', {
+    var signup = MP.api.segment('Level Completed', '$city', {
         from: moment().subtract(1, 'months'),
         unit: 'day'
     });
@@ -48,8 +48,8 @@
             $('<div></div>').appendTo('body').MPChart({
                 chartType: 'line',
                 data: {
-                    'Content searched': value,
-                    'Button clicked': signup[city]
+                    'Game Played': value,
+                    'Level Completed': signup[city]
                 }
             });
               });

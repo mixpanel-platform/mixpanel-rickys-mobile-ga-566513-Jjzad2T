@@ -17,20 +17,20 @@
     <div id="table"></div>
     <script>
      MP.api.ready(function() {
-    var gamePlayed = MP.api.segment('Game Played', '$city', {
+    var contentSearched = MP.api.segment('Game Played', '$city', {
         from: moment().subtract(1, 'months'),
         unit: 'day'
     });
-    var levelCompleted = MP.api.segment('Level Completed', '$city', {
+    var signup = MP.api.segment('Level Completed', '$city', {
         from: moment().subtract(1, 'months'),
         unit: 'day'
     });
 
-    $.when(gamePlayed, levelCompleted).done(function(completed, played) {
-        played = played.values();
+    $.when(contentSearched, signup).done(function(searched, signup) {
+        signup = signup.values();
 
-        _.each(completed.values(), function(value, city) {
-            if (!played[city]) {
+        _.each(searched.values()[5], function(value, city) {
+            if (!signup[city]) {
                 return;
             }
 
@@ -49,7 +49,7 @@
                 chartType: 'line',
                 data: {
                     'Game Played': value,
-                    // 'Level Completed': played[city]
+                    'Level Completed': signup[city]
                 }
             });
               });

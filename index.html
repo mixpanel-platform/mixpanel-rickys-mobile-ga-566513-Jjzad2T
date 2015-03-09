@@ -16,35 +16,44 @@
     </div>
     <div id="table"></div>
     <script>
-      MP.api.ready(function() {
-        var eventSelect = $('#eventSelect').MPEventSelect();
-        var propSelect  = $('#propSelect').MPPropertySelect();
-        var dateSelect  = $('#dateSelect').MPDatepicker();
-        var eventGraph  = $('#graph').MPChart({chartType: 'line'});
-        var eventTable  = $('#table').MPTable({
-          showPercentages: true,
-          firstColHeader: 'Event'
-        });
+     MP.api.ready(function() {
+    var contentSearched = MP.api.segment('Content searched', '$city', {
+        from: moment().subtract(1, 'months'),
+        unit: 'day'
+    });
+    var signup = MP.api.segment('Button clicked', '$city', {
+        from: moment().subtract(1, 'months'),
+        unit: 'day'
+    });
 
-        var runQuery = function() {
-          var eventName = eventSelect.MPEventSelect('value'),
-              propName  = propSelect.MPPropertySelect('value'),
-              dateRange = dateSelect.MPDatepicker('value');
+    $.when(contentSearched, signup).done(function(searched, signup) {
+        signup = signup.values();
 
-          if (eventName) {
-            MP.api.segment(eventName, propName, dateRange).done(function(results) {
-              eventGraph.MPChart('setData', results);
-              eventTable.MPTable('setData', results);
+        _.each(searched.values(), function(value, city) {
+            if (!signup[city]) {
+                return;
+            }
+
+            $('<span>' + city + '</span>').css({
+                'background': 'white',
+                'border': '1px solid #7a8195',
+                'border-radius': '5px',
+                'color': '#7a8195',
+                'display': 'inline-block',
+                'margin-bottom': '20px',
+                'margin-top': '10px',
+                'padding': '10px'
+            }).appendTo('body');
+
+            $('<div></div>').appendTo('body').MPChart({
+                chartType: 'line',
+                data: {
+                    'Content searched': value,
+                    'Button clicked': signup[city]
+                }
             });
-          }
-        };
-        eventSelect.on('change', function(e, eventName) {
-          propSelect.MPPropertySelect('setEvent', eventName);
-          $("#by").show();
-          runQuery();
-        });
-        propSelect.on('change', runQuery);
-        dateSelect.on('change', runQuery);
+              });
+          });
       });
     </script>
   </body>

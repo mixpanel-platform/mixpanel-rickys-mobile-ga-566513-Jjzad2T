@@ -28,18 +28,15 @@
             unit: 'day'
         });
 
-    $.when(contentSearched, signup).done(function(searched, signup) {
-        
+    $.when(gamePlayed, levelCompleted).done(function(played, completed) {
+            var drawGraph = function(chartData){
 
-            $('<div></div>').css({'width':'450px'}).appendTo('body').MPChart({
-                chartType: 'line',
-                data: {
-                    'Game Played': value,
-                    'Level Completed': signup[city]
-                }
-            });
-              });
-          });
+                $('<div></div>').css({'width':'450px', 'float':'left'}).appendTo('body').MPChart({
+                    chartType: 'line',
+                    data: chartData
+                });
+            }
+          }  
       });
     </script>
   </body>

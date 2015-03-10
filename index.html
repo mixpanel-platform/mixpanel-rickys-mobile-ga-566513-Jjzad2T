@@ -19,33 +19,17 @@
      MP.api.ready(function() {
         /*  First Chart */
         
-        var contentSearched = MP.api.events('Game Played', {
+        var gamePlayed = MP.api.events('Game Played', {
             from: moment().subtract(1, 'months'),
             unit: 'day'
         });
-        var signup = MP.api.events('Level Completed', {
+        var levelCompleted = MP.api.events('Level Completed', {
             from: moment().subtract(1, 'months'),
             unit: 'day'
         });
 
     $.when(contentSearched, signup).done(function(searched, signup) {
-        signup = signup.values();
         
-        _.each(searched.values(), function(value, city) {
-            if (!signup[city]) {
-                return;
-            }
-            console.log(searched.values());
-            $('<span>' + city + '</span>').css({
-                'background': 'white',
-                'border': '1px solid #7a8195',
-                'border-radius': '5px',
-                'color': '#7a8195',
-                'display': 'inline-block',
-                'margin-bottom': '20px',
-                'margin-top': '10px',
-                'padding': '10px',
-            }).appendTo('body');
 
             $('<div></div>').css({'width':'450px'}).appendTo('body').MPChart({
                 chartType: 'line',

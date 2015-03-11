@@ -19,25 +19,32 @@
      MP.api.ready(function() {
         /*  First Chart */
         
-        var gamePlayed = MP.api.events('Game Played', 'Level Completed', {
+        var first_chart = MP.api.events('Game Played', 'Level Completed', {
             from: moment().subtract(1, 'months'),
             unit: 'day'
         });
-        var levelCompleted = MP.api.events('Level Completed', {
+        
+        var second_chart = MP.api.events('App Install', 'App Open', {
             from: moment().subtract(1, 'months'),
             unit: 'day'
         });
-
-          $.when(gamePlayed, levelCompleted).done(function(played, completed) {
-            var drawGraph = function(chartData){
+       
+          $.when(first_chart, second_chart).done(function(first_chart, second_chart) {
+            var drawGraph = function(firstChartData, secondChartData){
           
-                $('<div></div>').css({'width':'470px', 'float':'left'}).appendTo('body').MPChart({
+                $('<div class="first"></div>').css({'width':'460px', 'float':'left', 'margin-right':'10px'}).appendTo('body').MPChart({
                     chartType: 'line',
-                    data: chartData
+                    data: firstChartData
+                });
+                $('<div class="second"></div>').css({'width':'460px', 'float':'right'}).appendTo('body').MPChart({
+                    chartType: 'line',
+                    data: secondChartData
                 });
             }
             
-            drawGraph(played.values());
+            
+            
+            drawGraph(first_chart.values(), second_chart.values());
             
           });
      });

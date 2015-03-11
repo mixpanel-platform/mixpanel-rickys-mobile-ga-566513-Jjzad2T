@@ -36,15 +36,16 @@
             
             var drawGraph = function(firstChartData, secondChartData){
           
-                $('<div class="first"></div>').css({'width':'460px', 'float':'left', 'margin-right':'10px'}).appendTo('body').MPChart({
+                $('<div class="first"></div>').css({'width':'460px', 'float':'left', 'margin':'0 0 0 10px'}).appendTo('body').MPChart({
                     chartType: 'line',
                     data: firstChartData
                 });
-                
+                /*
                 $('<div class="second"></div>').css({'width':'460px', 'float':'right'}).appendTo('body').MPChart({
                     chartType: 'line',
                     data: secondChartData
                 });
+                */
             }
             
             drawGraph(first_chart.values(), second_chart.values());

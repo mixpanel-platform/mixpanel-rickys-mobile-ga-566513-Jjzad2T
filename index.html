@@ -24,10 +24,10 @@
             unit: 'day'
         });
         
-        var second_chart = MP.api.events('App Install', 'App Open', {
+        /*var second_chart = MP.api.events('App Install', 'App Open', {
             from: moment().subtract(1, 'months'),
             unit: 'day'
-        });
+        });*/
        
           $.when(first_chart, second_chart).done(function(first_chart, second_chart) {
             

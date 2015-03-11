@@ -29,12 +29,19 @@
             unit: 'day'
         });
        
-         $.when(first_chart, second_chart).done(function(first_chart, second_chart) {
+       
+        var third_chart = MP.api.events('Character Created', 'Session End', {
+            //from: moment().subtract(1, 'months'),
+            unit: 'day'
+        });
+        
+        
+        $.when(first_chart, second_chart).done(function(first_chart, second_chart, third_chart) {
             
             console.log(first_chart.values());
             console.log(second_chart.values());
             
-            var drawGraph = function(firstChartData, secondChartData){
+            var drawGraph = function(firstChartData, secondChartData, thirdChartData){
           
                 $('<div class="first"></div>').css({'width':'460px', 'float':'left', 'margin':'0 0 0 10px'}).appendTo('body').MPChart({
                     chartType: 'line',
@@ -46,12 +53,17 @@
                     data: secondChartData
                 });
                 
+                $('<div class="third"></div>').css({'width':'460px', 'float':'left'}).appendTo('body').MPChart({
+                    chartType: 'line',
+                    data: thirdChartData
+                });
+                
             }
             
             
-            drawGraph(first_chart.values(), second_chart.values());
+            drawGraph(first_chart.values(), second_chart.values(), thirdChartData);
             
-          });
+        });
      });
     </script>
   </body>

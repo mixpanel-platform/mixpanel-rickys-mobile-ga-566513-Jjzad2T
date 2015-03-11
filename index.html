@@ -30,19 +30,22 @@
         });
        
           $.when(first_chart, second_chart).done(function(first_chart, second_chart) {
+            
+            console.log(first_chart.values());
+            console.log(second_chart.values());
+            
             var drawGraph = function(firstChartData, secondChartData){
           
                 $('<div class="first"></div>').css({'width':'460px', 'float':'left', 'margin-right':'10px'}).appendTo('body').MPChart({
                     chartType: 'line',
                     data: firstChartData
                 });
+                
                 $('<div class="second"></div>').css({'width':'460px', 'float':'right'}).appendTo('body').MPChart({
                     chartType: 'line',
                     data: secondChartData
                 });
             }
-            
-            
             
             drawGraph(first_chart.values(), second_chart.values());
             

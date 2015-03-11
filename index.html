@@ -19,7 +19,7 @@
      MP.api.ready(function() {
         /*  First Chart */
         
-        var gamePlayed = MP.api.events('Game Played', {
+        var gamePlayed = MP.api.events('Game Played', 'Level Completed', {
             from: moment().subtract(1, 'months'),
             unit: 'day'
         });
@@ -30,12 +30,14 @@
 
     $.when(gamePlayed, levelCompleted).done(function(played, completed) {
             var drawGraph = function(chartData){
-
+          
                 $('<div></div>').css({'width':'450px', 'float':'left'}).appendTo('body').MPChart({
                     chartType: 'line',
                     data: chartData
                 });
             }
+            
+            drawGraph(played.values());
           }  
       });
     </script>

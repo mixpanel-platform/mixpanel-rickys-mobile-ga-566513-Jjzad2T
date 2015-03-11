@@ -25,23 +25,27 @@
         });
      
         var second_chart = MP.api.events('App Install', 'App Open', {
-            //from: moment().subtract(1, 'months'),
+            from: moment().subtract(1, 'months'),
             unit: 'day'
         });
        
        
         var third_chart = MP.api.events('Character Created', 'Session End', {
-            //from: moment().subtract(1, 'months'),
+            from: moment().subtract(1, 'months'),
+            unit: 'day'
+        });
+        
+        var fourth_chart = MP.api.events('Tutorial Exited', 'Registration Complete', {
+            from: moment().subtract(1, 'months'),
             unit: 'day'
         });
         
         
-        $.when(first_chart, second_chart, third_chart).done(function(first_chart, second_chart, third_chart) {
+        $.when(first_chart, second_chart, third_chart, fourth_chart).done(function(first_chart, second_chart, third_chart, fourth_chart) {
             
-            console.log(first_chart.values());
-            console.log(second_chart.values());
+           
             
-            var drawGraph = function(firstChartData, secondChartData, thirdChartData){
+            var drawGraph = function(firstChartData, secondChartData, thirdChartData, fourthChartData){
           
                 $('<div class="first"></div>').css({'width':'460px', 'float':'left', 'margin':'0 10px 0px 0px'}).appendTo('body').MPChart({
                     chartType: 'line',
@@ -58,10 +62,15 @@
                     data: thirdChartData
                 });
                 
+                $('<div class="fourth"></div>').css({'width':'460px', 'float':'right'}).appendTo('body').MPChart({
+                    chartType: 'line',
+                    data: fourthChartData
+                });
+                
             }
             
             
-            drawGraph(first_chart.values(), second_chart.values(), third_chart.values());
+            drawGraph(first_chart.values(), second_chart.values(), third_chart.values(), fourth_chart.values());
             
         });
      });

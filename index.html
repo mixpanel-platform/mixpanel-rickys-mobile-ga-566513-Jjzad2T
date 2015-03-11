@@ -18,14 +18,14 @@
     <script>
      MP.api.ready(function() {
         /*  First Chart */
-        /*
+      
         var first_chart = MP.api.events('Game Played', 'Level Completed', {
             from: moment().subtract(1, 'months'),
             unit: 'day'
-        });*/
-        // console.log(first_chart.values());
+        });
+        console.log(first_chart.values());
         
-        /*var second_chart = MP.api.events('App Install', 'App Open', {
+        var second_chart = MP.api.events('App Install', 'App Open', {
             //from: moment().subtract(1, 'months'),
             unit: 'day'
         });
@@ -52,7 +52,7 @@
             
             drawGraph(first_chart.values(), second_chart.values());
             
-          });*/
+          });
      });
     </script>
   </body>

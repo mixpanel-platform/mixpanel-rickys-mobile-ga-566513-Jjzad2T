@@ -28,7 +28,7 @@
             unit: 'day'
         });
 
-    $.when(gamePlayed, levelCompleted).done(function(played, completed) {
+          $.when(gamePlayed, levelCompleted).done(function(played, completed) {
             var drawGraph = function(chartData){
           
                 $('<div></div>').css({'width':'450px', 'float':'left'}).appendTo('body').MPChart({
@@ -39,7 +39,8 @@
             
             drawGraph(played.values());
             
-      });
+          });
+     });
     </script>
   </body>
 </html>
